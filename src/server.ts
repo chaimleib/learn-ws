@@ -1,6 +1,7 @@
 import * as express from 'express'
 import * as http from 'http'
-import * as WebSocket from 'ws';
+import * as WebSocket from 'ws'
+import * as net from 'net'
 
 const app = express()
 
@@ -17,7 +18,7 @@ wss.on('connection', (ws: WebSocket) => {
 })
 
 server.listen(process.env.PORT || 8999, () => {
-  const { port } = server.address() as AddressInfo;
+  const { port } = server.address() as net.AddressInfo;
   console.log(`Server started: ${port}`)
 })
 
