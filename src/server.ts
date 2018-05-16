@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as http from 'http'
 import * as WebSocket from 'ws'
 import * as net from 'net'
+import { interval } from 'rxjs/observable/interval'
 
 const app = express()
 
@@ -15,6 +16,10 @@ wss.on('connection', (ws: WebSocket) => {
     ws.send(`Hello, you sent -> ${message}`)
   })
   ws.send('Hi there, I am a WebSocket server')
+  interval(3000).subscribe(x => {
+    ws.send(`${x}`)
+    console.log(x)
+  })
 })
 
 server.listen(process.env.PORT || 8999, () => {
